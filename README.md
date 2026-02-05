@@ -6,7 +6,7 @@ By integrating **co-expression patterns**, **sequence motifs**, and **orthology-
 
 ---
 
-## 🚀 Installation
+## Installation
 
 PURE consists of three core Python scripts (`PURE_Data_Process.py`, `PURE_CatBoost_SHAP.py`, `PURE_Contribution_Visualization.py`) located in the root directory. 
 
@@ -31,7 +31,7 @@ conda activate PURE
 
 ------
 
-## 🛠️ Usage
+## Usage
 
 ### 1. Data Processing Module (`PURE_Data_Process.py`)
 
@@ -135,7 +135,7 @@ python PURE_Contribution_Visualization.py \
 
 ------
 
-## 🌐 Web Service
+## Web Service
 
 For researchers who prefer a graphical interface or lack computational resources, PURE is accessible as a comprehensive web resource (https://plantencodedb.sjtu.edu.cn/pure/). The web platform allows experimental biologists to bypass computational barriers and directly prioritize high-confidence regulators for downstream functional verification.
 
