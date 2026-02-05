@@ -37,11 +37,9 @@ conda activate PURE_env
 
 ### 1. Data Processing Module (`PURE_Data_Process.py`)
 
-This module constructs the regulatory feature matrix.
+This module constructs the regulatory feature matrix by integrating co-expression networks with Ortho-ChIP projection.
 
-**Key Feature:** It utilizes BLAST to map ChIP-seq peaks from reference species (e.g., Maize, Arabidopsis) to your target species. This **Ortho-ChIP projection** strategy significantly reduces false positives compared to motif scanning alone.
-
-#### Option A: Run from Raw RNA-Seq Data
+#### Option A: Run from Raw Data
 
 ```bash
 python Script/PURE_Data_Process.py \
