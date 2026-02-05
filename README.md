@@ -45,17 +45,17 @@ This module constructs the regulatory feature matrix by integrating co-expressio
 python Script/PURE_Data_Process.py \
     --out_prefix O_sativa_TF_regulatory_raw \
     --threads 48 \
-    --target_genome_config Example_data/1_process_Example_data/0_O_sativa_genome.config \
-    --target_tf_list Example_data/1_process_Example_data/0_Os_TF_list_itak.txt \
+    --target_genome_config Example_data/1_process_example_data/0_O_sativa_genome.config \
+    --target_tf_list Example_data/1_process_example_data/0_Os_TF_list_itak.txt \
     --coexpr_chip_motif "0.5,0.5,Y" "0.5,0.5,N" "0,1,Y" "1,0,Y" "0,1,N" "1,0,N" \
-    --rna_matrix Example_data/1_process_Example_data/1_Os_RNA-seq_TPM_matrix_10sample.tsv \
+    --rna_matrix Example_data/1_process_example_data/1_Os_RNA-seq_TPM_matrix_10sample.tsv \
     --genie3_filter "q10" \
-    --atac_peak_config Example_data/1_process_Example_data/2_Os_At_Zm_ATAC.config \
-    --chip_ref_genome_config Example_data/1_process_Example_data/2_At_Zm_genome.config \
-    --chip_peak_config Example_data/1_process_Example_data/2_At_Zm_peaks_path_q005.config \
+    --atac_peak_config Example_data/1_process_example_data/2_Os_At_Zm_ATAC.config \
+    --chip_ref_genome_config Example_data/1_process_example_data/2_At_Zm_genome.config \
+    --chip_peak_config Example_data/1_process_example_data/2_At_Zm_peaks_path_q005.config \
     --blast_evalue 1e-20 \
-    --motif_list Example_data/1_process_Example_data/3_Motif_family.config \
-    --motif_file Example_data/1_process_Example_data/3_DAP_ChIP_motifs.meme \
+    --motif_list Example_data/1_process_example_data/3_Motif_family.config \
+    --motif_file Example_data/1_process_example_data/3_DAP_ChIP_motifs.meme \
     --motif_scan_pvalue 1e-4 \
     > Osativa_TF_regulatory_raw.log 2>&1 &
 
@@ -74,16 +74,16 @@ Use this if you already have GENIE3 or BLAST results and want to retune integrat
 python Script/PURE_Data_Process.py \
     --out_prefix O_sativa_TF_regulatory_mid \
     --threads 48 \
-    --target_genome_config Example_data/1_process_Example_data/0_O_sativa_genome.config \
-    --target_tf_list Example_data/1_process_Example_data/0_Os_TF_list_itak.txt \
+    --target_genome_config Example_data/1_process_example_data/0_O_sativa_genome.config \
+    --target_tf_list Example_data/1_process_example_data/0_Os_TF_list_itak.txt \
     --coexpr_chip_motif "0.5,0.5,Y" "0.5,0.5,N" "0,1,Y" "1,0,Y" "0,1,N" "1,0,N" \
-    --genie3_file Example_data/1_process_Example_data/1_O_sativa_TF_regulatory_GENIE3_q10_normalization.tsv \
-    --atac_peak_config Example_data/1_process_Example_data/2_Os_At_Zm_ATAC.config \
-    --chip_ref_genome_config Example_data/1_process_Example_data/2_At_Zm_genome.config \
-    --chip_peak_config Example_data/1_process_Example_data/2_At_Zm_peaks_path_q005.config \
-    --blast_result_file Example_data/1_process_Example_data/2_O_sativa_TF_regulatory_blast_relationship.tsv \
-    --motif_list Example_data/1_process_Example_data/3_Motif_family.config \
-    --motif_file Example_data/1_process_Example_data/3_DAP_ChIP_motifs.meme \
+    --genie3_file Example_data/1_process_example_data/1_O_sativa_TF_regulatory_GENIE3_q10_normalization.tsv \
+    --atac_peak_config Example_data/1_process_example_data/2_Os_At_Zm_ATAC.config \
+    --chip_ref_genome_config Example_data/1_process_example_data/2_At_Zm_genome.config \
+    --chip_peak_config Example_data/1_process_example_data/2_At_Zm_peaks_path_q005.config \
+    --blast_result_file Example_data/1_process_example_data/2_O_sativa_TF_regulatory_blast_relationship.tsv \
+    --motif_list Example_data/1_process_example_data/3_Motif_family.config \
+    --motif_file Example_data/1_process_example_data/3_DAP_ChIP_motifs.meme \
     --motif_scan_pvalue 1e-4 \
     > Osativa_TF_regulatory_mid.log 2>&1 &
 ```
@@ -97,14 +97,14 @@ python Script/PURE_CatBoost_SHAP.py \
     --out_prefix Os_zt4h_vs_zt20h_Result \
     --threads 48 \
     --h5_key "/regulons" \
-    --TF_features Example_data/2_catboost_Example_data/O_sativa_TF_regulatory.h5 \
+    --TF_features Example_data/2_catboost_example_data/O_sativa_TF_regulatory.h5 \
     --n_splits 10 \
     --iterations 1500 \
     --learning_rate 0.03 \
     --depth 6 \
     --l2_leaf_reg 3.0 \
     --auto_class_weights "Balanced" \
-    --DEGs Example_data/2_catboost_Example_data/Os_zt4h_vs_zt20h_DEG_2col.csv \
+    --DEGs Example_data/2_catboost_example_data/Os_zt4h_vs_zt20h_DEG_2col.csv \
     > Os_zt4h_vs_zt20h_CatBoost.log 2>&1 &
  
  # HDF5 key for the regulatory matrix (default is /regulons) (Generated from Step 1)
@@ -119,13 +119,13 @@ python Script/PURE_CatBoost_SHAP.py \
 ```bash
 python Script/PURE_Contribution_Visualization.py \
     --out_prefix Os_LvsD_SHAP_Plots \
-    --contribution_matrix Example_data/3_visualization_Example_data/Os_LvsD_SHAP_exp_0.1121_pos_is_Light_neg_is_Dark.csv \
+    --contribution_matrix Example_data/3_visualization_example_data/Os_LvsD_SHAP_exp_0.1121_pos_is_Light_neg_is_Dark.csv \
     --filter_percent 20 \
-    --target_tf_list Example_data/3_visualization_Example_data/0_Os_TF_list_itak.txt \
-    --pathway_config Example_data/3_visualization_Example_data/Os_PS_LHC_genes.config \
-    --best_hit_to_model_species Example_data/3_visualization_Example_data/Os2At_besthit.blast \
-    --heatmap_expression Example_data/3_visualization_Example_data/Os_zeitgeber_TPM.tsv \
-    --model_species_annotation Example_data/3_visualization_Example_data/At_annotation.config \
+    --target_tf_list Example_data/3_visualization_example_data/0_Os_TF_list_itak.txt \
+    --pathway_config Example_data/3_visualization_example_data/Os_PS_LHC_genes.config \
+    --best_hit_to_model_species Example_data/3_visualization_example_data/Os2At_besthit.blast \
+    --heatmap_expression Example_data/3_visualization_example_data/Os_zeitgeber_TPM.tsv \
+    --model_species_annotation Example_data/3_visualization_example_data/At_annotation.config \
     > Os_LvsD_SHAP_vis.log 2>&1 &
 
 # --filter_percent: Retains only the top 20% of interactions to focus on high-confidence regulatory signals
