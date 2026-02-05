@@ -12,9 +12,9 @@ By integrating **co-expression patterns**, **sequence motifs**, and **orthology-
 
 ## Installation
 
-PURE consists of three core Python scripts (`PURE_Data_Process.py`, `PURE_CatBoost_SHAP.py`, `PURE_Contribution_Visualization.py`) located in the root directory. 
+PURE consists of three core Python scripts (`PURE_Data_Process.py`, `PURE_CatBoost_SHAP.py`, `PURE_Contribution_Visualization.py`) located in the “Script/“ directory. 
 
-We recommend managing dependencies via Conda/Mamba using the provided configuration file.
+We recommend managing dependencies via Conda/Mamba using the provided configuration file (PURE_env.yml).
 
 **1. Clone the repository:**
 
@@ -28,7 +28,6 @@ cd PURE
 Bash
 
 ```bash
-# Note: The environment file is named PURE_env.yml
 conda env create -f PURE_env.yml
 conda activate PURE
 ```
@@ -46,7 +45,7 @@ This module constructs the regulatory feature matrix.
 #### Option A: Run from Raw RNA-Seq Data
 
 ```bash
-python PURE_Data_Process.py \
+python Script/PURE_Data_Process.py \
     --out_prefix O_sativa_TF_regulatory_raw \
     --threads 48 \
     --target_genome_config Example_data/1_process_Example_data/0_O_sativa_genome.config \
@@ -74,7 +73,7 @@ Use this if you already have GENIE3 or BLAST results and want to retune integrat
 
 ```bash
 # Pre-computed GENIE3 file & BLAST result for Ortho-ChIP projection
-python PURE_Data_Process.py \
+python Script/PURE_Data_Process.py \
     --out_prefix O_sativa_TF_regulatory_mid \
     --threads 48 \
     --target_genome_config Example_data/1_process_Example_data/0_O_sativa_genome.config \
@@ -96,7 +95,7 @@ python PURE_Data_Process.py \
 This module predicts Differentially Expressed Genes (DEGs) and calculates TF contributions using SHAP.
 
 ```bash
-python PURE_CatBoost_SHAP.py \
+python Script/PURE_CatBoost_SHAP.py \
     --out_prefix Os_zt4h_vs_zt20h_Result \
     --threads 48 \
     --h5_key "/regulons" \
@@ -120,7 +119,7 @@ python PURE_CatBoost_SHAP.py \
 **Turn your SHAP matrices into publication-ready figures.** This module is not just for plotting; it allows you to zoom in on **specific pathways or genes of interest**, transforming raw scores into biologically meaningful insights (e.g., Photosynthesis pathways, Stress response modules).
 
 ```bash
-python PURE_Contribution_Visualization.py \
+python Script/PURE_Contribution_Visualization.py \
     --out_prefix Os_LvsD_SHAP_Plots \
     --contribution_matrix Example_data/3_visualization_Example_data/Os_LvsD_SHAP_exp_0.1121_pos_is_Light_neg_is_Dark.csv \
     --filter_percent 20 \
@@ -133,7 +132,7 @@ python PURE_Contribution_Visualization.py \
 
 # --filter_percent: Retains only the top 20% of interactions to focus on high-confidence regulatory signals
 # --pathway_config: Focus visualization on specific biological pathways
-# --heatmap_expression: Get expression pattern of your intested genes and key TFs
+# --heatmap_expression: Get expression pattern of your interested genes and key TFs
 # --best_hit_to_model_species & --model_species_annotation: Map TFs to a model species for functional annotation and readable naming
 ```
 
