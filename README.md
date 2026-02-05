@@ -139,4 +139,4 @@ python PURE_Contribution_Visualization.py \
 
 For researchers who prefer a graphical interface or lack computational resources, PURE is accessible as a comprehensive web resource. The web platform allows experimental biologists to bypass computational barriers and directly prioritize high-confidence regulators for downstream functional verification.
 
-**[Visit PURE Online](https://www.google.com/search?q=https://plantencodedb.sjtu.edu.cn/pure/)**
+**[Visit PURE Online](https://www.google.com/url?sa=E&source=gmail&q=https://plantencodedb.sjtu.edu.cn/pure/)**
