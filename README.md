@@ -15,7 +15,7 @@ We recommend managing dependencies via Conda/Mamba using the provided configurat
 **1. Clone the repository:**
 
 ```bash
-git clone [https://github.com/YourUsername/PURE.git](https://github.com/YourUsername/PURE.git)
+git clone https://github.com/tulab-sjtu/PURE
 cd PURE
 ```
 
