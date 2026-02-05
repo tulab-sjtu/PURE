@@ -4,7 +4,9 @@
 
 By integrating **co-expression patterns**, **sequence motifs**, and **orthology-projected *in vivo* binding evidence**, PURE overcomes regulatory data sparsity in non-model species. It employs interpretability-first machine learning (CatBoost + SHAP) to decode transcriptomic programs, allowing researchers to prioritize high-confidence regulators governing stress responses, development, and specific metabolic pathways.
 
-![PURE Diagram](./Figures/PURE_diagram.png)
+<p align="center">
+  <img src="./Figures/PURE_diagram.png" alt="PURE Diagram" width="600">
+</p>
 
 ---
 
