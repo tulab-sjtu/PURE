@@ -20,7 +20,6 @@ We recommend managing dependencies via Conda/Mamba using the provided configurat
 
 ```bash
 git clone https://github.com/tulab-sjtu/PURE
-cd PURE
 ```
 
 **2. Create the environment:**
@@ -28,8 +27,8 @@ cd PURE
 Bash
 
 ```bash
-conda env create -f PURE_env.yml
-conda activate PURE
+conda env create -f Script/PURE_env.yml
+conda activate PURE_env
 ```
 
 ------
@@ -65,6 +64,7 @@ python Script/PURE_Data_Process.py \
 # GENIE3 Filter: Top 10% links (q10) or Top 100k links (100k) to reduce noise
 # Weight strategy: "Co-expr_Weight, ChIP_Weight, Use_Motif(Y/N)"
 # Example: "0.5,0.5,Y" means equal weight for Co-expr and ChIP, filtered by Motif.
+⚠️ CRITICAL CONFIGURATION STEP: Before running the pipeline, you MUST edit all referenced configuration files (*.config). Ensure that the internal file paths point to your actual local Genome FASTA, GFF3 Annotations, ChIP-seq Peaks, and ATAC-seq Peaks. The paths in the example configs are placeholders and need to be replaced with your real file locations.
 ```
 
 #### Option B: Run from Intermediate Files (Mid-Mode)
