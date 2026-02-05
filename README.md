@@ -4,6 +4,8 @@
 
 By integrating **co-expression patterns**, **sequence motifs**, and **orthology-projected *in vivo* binding evidence**, PURE overcomes regulatory data sparsity in non-model species. It employs interpretability-first machine learning (CatBoost + SHAP) to decode transcriptomic programs, allowing researchers to prioritize high-confidence regulators governing stress responses, development, and specific metabolic pathways.
 
+![PURE Diagram](./Figures/PURE_diagram.png)
+
 ---
 
 ## Installation
@@ -139,4 +141,4 @@ python PURE_Contribution_Visualization.py \
 
 For researchers who prefer a graphical interface or lack computational resources, PURE is accessible as a comprehensive web resource (https://plantencodedb.sjtu.edu.cn/pure/). The web platform allows experimental biologists to bypass computational barriers and directly prioritize high-confidence regulators for downstream functional verification.
 
-**[Visit PURE Online](https://www.google.com/url?sa=E&source=gmail&q=https://plantencodedb.sjtu.edu.cn/pure/)**
+![PURE Web](./Figures/PURE_Web.png)
