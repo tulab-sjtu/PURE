@@ -108,7 +108,7 @@ python Script/PURE_CatBoost_SHAP.py \
     > Os_zt4h_vs_zt20h_CatBoost.log 2>&1 &
  
  # HDF5 key for the regulatory matrix (default is /regulons) (Generated from Step 1)
- # --auto_class_weights: Automatically balance weights for DEGs (pos) vs non-DEGs (neg)
+ # --auto_class_weights: Automatically balance weights for pos vs neg genes
  # --DEGs: Target Label: 2-column CSV (GeneID, Label)
 ```
 
