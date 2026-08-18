@@ -162,6 +162,14 @@ python Script/PURE_Data_Process_v3.py \
   --coexpr_chip_motif "0.5,0.5,Y" "0.5,0.5,N" "0,1,Y" "1,0,Y"
 ```
 
+PURE does not require its internally generated BLAST or DIAMOND results when a compatible homology table is already available. Results from other homology workflows, including OrthoFinder, may be used through `--alignment_result_file` after conversion to a headerless, tab-delimited three-column table:
+
+```text
+GeneID1    GeneID2    PairwisePercentIdentity
+```
+
+Each row must represent a direct gene pair, and the third column must be a finite value from 0 to 100. Include the direct TF–TF and target–target relationships required for projection. Native OrthoFinder files such as `Orthogroups.tsv` must therefore be converted before use. The scores are used as weights when `--homology_signal_aggregation weighted_mean` is selected.
+
 ### Principal parameters
 
 | Parameter | Description |
@@ -176,7 +184,7 @@ python Script/PURE_Data_Process_v3.py \
 | `--homology_vote_threshold` | Minimum pooled fraction of binding-supported reference TF homologs required to transfer an interaction. Default: `0.5`. |
 | `--homology_signal_aggregation` | Aggregate transferred binding signals with `max`, `median`, or `weighted_mean`. Default: `max`. |
 | `--aligner` | Protein-similarity backend: `blast` or `diamond`. |
-| `--alignment_result_file` | Precomputed `query`, `subject`, `percent_identity` table. Alias: `--blast_result_file`. |
+| `--alignment_result_file` | Precomputed direct homology table (`GeneID1`, `GeneID2`, `percent_identity`), including suitably converted output from OrthoFinder or other tools. Alias: `--blast_result_file`. |
 | `--coexpr_chip_motif` | One or more `CoexpressionWeight,BindingWeight,Y/N` settings. |
 
 For `weighted_mean`, PURE weights each transferred observation by the geometric mean of the direct TF-homology and target-homology percent identities. Observations without both direct relationships are not assigned an inferred weight.

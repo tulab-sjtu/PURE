@@ -2947,7 +2947,7 @@ def main():
 
     parser.add_argument('--blast_result_file', '--alignment_result_file', dest='blast_result_file', metavar='ALIGNMENT_RESULT_FILE',
 
-                        help="Precomputed tabular protein alignment file with columns: qseqid, sseqid, pident. The --blast_result_file name is retained for backward compatibility; --alignment_result_file is the preferred generic alias.")
+                        help="Precomputed headerless direct-homology table with columns: gene_id_1, gene_id_2, pairwise_percent_identity (0-100). Converted output from OrthoFinder or other homology tools is accepted; native group tables must first be expanded to direct gene pairs. The --blast_result_file name is retained for backward compatibility.")
 
     parser.add_argument('--blast_evalue', '--blast_evalue_cutoff', '--alignment_evalue', dest='blast_evalue', metavar='ALIGNMENT_EVALUE', default='1e-20',
 
