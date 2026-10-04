@@ -112,19 +112,19 @@ done
 
 Species IDs are used in file names and in the `SpeciesID` column of the configuration files. Gene IDs follow the genome annotations listed in `resources/genome/` (Supplemental Table 1). The public ATAC-seq/DNase-seq datasets used to define accessible regions are listed in `resources/chromatin_accessibility/` (Supplemental Table 2).
 
-| SpeciesID | Species | Feature matrices (Zenodo) | Example TF list | Reference binding peaks |
-| --- | --- | :---: | :---: | --- |
-| `A_thaliana` | *Arabidopsis thaliana* | ✓ | ✓ | DAP-seq |
-| `B_napus` | *Brassica napus* | ✓ | | |
-| `C_reinhardtii` | *Chlamydomonas reinhardtii* | ✓ | ✓ | |
-| `G_hirsutum` | *Gossypium hirsutum* | ✓ | | |
-| `G_max` | *Glycine max* | ✓ | | |
-| `M_polymorpha` | *Marchantia polymorpha* | ✓ | | |
-| `O_sativa` | *Oryza sativa* | ✓ | ✓ | DAP-seq |
-| `S_lycopersicum` | *Solanum lycopersicum* | ✓ | ✓ | DAP-seq |
-| `S_tuberosum` | *Solanum tuberosum* | ✓ | | |
-| `V_vinifera` | *Vitis vinifera* | ✓ | ✓ | |
-| `Z_mays` | *Zea mays* | ✓ | ✓ | ChIP-seq and DAP-seq |
+| SpeciesID | Species | Feature matrices (Zenodo) | Reference binding peaks |
+| --- | --- | :---: | --- |
+| `A_thaliana` | *Arabidopsis thaliana* | ✓ | DAP-seq |
+| `B_napus` | *Brassica napus* | ✓ | |
+| `C_reinhardtii` | *Chlamydomonas reinhardtii* | ✓ | |
+| `G_hirsutum` | *Gossypium hirsutum* | ✓ | |
+| `G_max` | *Glycine max* | ✓ | |
+| `M_polymorpha` | *Marchantia polymorpha* | ✓ | |
+| `O_sativa` | *Oryza sativa* | ✓ | DAP-seq |
+| `S_lycopersicum` | *Solanum lycopersicum* | ✓ | DAP-seq |
+| `S_tuberosum` | *Solanum tuberosum* | ✓ | |
+| `V_vinifera` | *Vitis vinifera* | ✓ | |
+| `Z_mays` | *Zea mays* | ✓ | ChIP-seq and DAP-seq |
 
 ### Module 1 resources
 
