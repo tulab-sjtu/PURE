@@ -1,0 +1,11 @@
+Num	SRA Accession	species	Data type
+1	SRR4000468	A_thaliana	ATAC-seq
+2	SRR34903506	B_napus	ATAC-seq
+3	SRR30847465	G_hirsutum	ATAC-seq
+4	SRR12494512	G_max	ATAC-seq
+5	SRR26909370	M_polymorpha	ATAC-seq
+6	SRR23699798	O_sativa	ATAC-seq
+7	SRR5405208	S_lycopersicum	DNase-seq
+8	SRR30488224	S_tuberosum	ATAC-seq
+9	SRR5405291	V_vinifera	DNase-seq
+10	SRR12321694	Zea_mays	ATAC-seq

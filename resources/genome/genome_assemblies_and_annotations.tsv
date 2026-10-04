@@ -1,0 +1,12 @@
+Species	Version	Data Source	Web
+Arabidopsis thaliana	Arabidopsis thaliana TAIR10	TAIR	https://www.arabidopsis.org/
+Brassica napus	ZS11.v0	BnIR	https://yanglab.hzau.edu.cn/BnIR/download?module=genomics
+Chlamydomonas reinhardtii	Chlamydomonas reinhardtii CC-4532 v6.1	Phytozome	https://phytozome-next.jgi.doe.gov/
+Glycine max	Glycine max Wm82.a4.v1	Phytozome	https://phytozome-next.jgi.doe.gov/
+Gossypium hirsutum	Gossypium hirsutum v3.1	Phytozome	https://phytozome-next.jgi.doe.gov/
+Marchantia polymorpha	TAK-1 v7.1	MarpolBase	https://marchantia.info/
+Oryza sativa	Oryza sativa v7.0	Phytozome	https://phytozome-next.jgi.doe.gov/
+Solanum lycopersicum	Solanum lycopersicum ITAG4.0	Phytozome	https://phytozome-next.jgi.doe.gov/
+Solanum tuberosum	Solanum tuberosum v6.1	Phytozome	https://phytozome-next.jgi.doe.gov/
+Vitis vinifera	PN40024.T2T (v5)	Grapedia	https://grapedia.org/genomes/
+Zea mays	Zm-B73-REFERENCE-NAM-5.0	maizeGDB	https://www.maizegdb.org/

@@ -52,6 +52,117 @@ Expression_rawdata_accession_for_PURE.csv RNA-seq accessions used by PURE
 Figures/
   PURE_diagram.png
   PURE_Web.png
+
+resources/                                Precomputed resources for the 11 species (see below)
+  genome/
+    genome_assemblies_and_annotations.xlsx      Supplemental Table 1
+    genome_assemblies_and_annotations.tsv       Same table, tab-delimited
+  chromatin_accessibility/
+    public_chromatin_accessibility_datasets.xlsx  Supplemental Table 2 (ATAC-seq/DNase-seq accessions)
+    public_chromatin_accessibility_datasets.tsv   Same table, tab-delimited
+  tf_lists/
+    {SpeciesID}_TF_list_iTAK.txt          Example TF lists (TFGeneID, TFFamily)
+  motifs/
+    PURE_TF_motifs.meme                   MEME-format motifs used for motif filtering
+    PURE_motif_to_TF_family.tsv           Motif-family mapping (MotifID, TFFamily)
+  reference_binding/
+    reference_binding_peaks_config.tsv    Reference TF-binding peak configuration
+    reference_binding_peaks/              Peak files; download from Zenodo (not tracked by git)
+tests/                                    Unit tests
+```
+
+## Precomputed Resources
+
+Small resources are stored in `resources/`. Large files, the regulatory feature matrices and the reference ChIP-seq/DAP-seq peak files, are archived on Zenodo: https://doi.org/10.5281/zenodo.23130484.
+
+### Zenodo archive
+
+Each archive is a separate `.tar.gz`, so you can download only the species you need. All files sit at the top level of the record:
+
+```text
+{SpeciesID}_regulatory_matrices.tar.gz        11 archives, one per target species (Module 2 input)
+  {SpeciesID}_TF_regulatory_Coexpr1.0_Binding0.0_MotifN.h5
+  {SpeciesID}_TF_regulatory_Coexpr0.5_Binding0.5_MotifY_overlap.h5
+{SpeciesID}_reference_binding_peaks.tar.gz    4 archives, one per reference species (Module 1 input)
+  {SpeciesID}/*.narrowPeak
+README.md
+MD5SUMS.txt
+```
+
+Download and check the files from the repository root. For example:
+
+```bash
+wget https://zenodo.org/records/23130484/files/O_sativa_regulatory_matrices.tar.gz
+wget https://zenodo.org/records/23130484/files/MD5SUMS.txt
+md5sum -c MD5SUMS.txt --ignore-missing
+tar -xzf O_sativa_regulatory_matrices.tar.gz
+```
+
+Reference peak archives must be extracted into `resources/reference_binding/reference_binding_peaks/`, because the paths in `reference_binding_peaks_config.tsv` are relative to the repository root:
+
+```bash
+mkdir -p resources/reference_binding/reference_binding_peaks
+for sp in A_thaliana Z_mays O_sativa S_lycopersicum; do
+  wget https://zenodo.org/records/23130484/files/${sp}_reference_binding_peaks.tar.gz
+  tar -xzf ${sp}_reference_binding_peaks.tar.gz -C resources/reference_binding/reference_binding_peaks
+done
+```
+
+### Species and resources
+
+Species IDs are used in file names and in the `SpeciesID` column of the configuration files. Gene IDs follow the genome annotations listed in `resources/genome/` (Supplemental Table 1). The public ATAC-seq/DNase-seq datasets used to define accessible regions are listed in `resources/chromatin_accessibility/` (Supplemental Table 2).
+
+| SpeciesID | Species | Feature matrices (Zenodo) | Example TF list | Reference binding peaks |
+| --- | --- | :---: | :---: | --- |
+| `A_thaliana` | *Arabidopsis thaliana* | ✓ | ✓ | DAP-seq |
+| `B_napus` | *Brassica napus* | ✓ | | |
+| `C_reinhardtii` | *Chlamydomonas reinhardtii* | ✓ | ✓ | |
+| `G_hirsutum` | *Gossypium hirsutum* | ✓ | | |
+| `G_max` | *Glycine max* | ✓ | | |
+| `M_polymorpha` | *Marchantia polymorpha* | ✓ | | |
+| `O_sativa` | *Oryza sativa* | ✓ | ✓ | DAP-seq |
+| `S_lycopersicum` | *Solanum lycopersicum* | ✓ | ✓ | DAP-seq |
+| `S_tuberosum` | *Solanum tuberosum* | ✓ | | |
+| `V_vinifera` | *Vitis vinifera* | ✓ | ✓ | |
+| `Z_mays` | *Zea mays* | ✓ | ✓ | ChIP-seq and DAP-seq |
+
+### Module 1 resources
+
+| Resource | Location | Module 1 option |
+| --- | --- | --- |
+| Reference TF-binding peaks | `resources/reference_binding/` and Zenodo | `--chip_peak_config`, `--chip_species` |
+| Motifs | `resources/motifs/PURE_TF_motifs.meme` | `--motif_file` |
+| Motif-family mapping | `resources/motifs/PURE_motif_to_TF_family.tsv` | `--motif_list` |
+| TF lists | `resources/tf_lists/` | `--target_tf_list` |
+| Accessible chromatin | `resources/chromatin_accessibility/` (dataset accessions) | `--atac_peak_config` |
+| Genomes, annotations, proteomes | `resources/genome/` (versions and download sites) | `--target_genome_config`, `--chip_ref_genome_config` |
+
+- The motif file contains motifs from 104 maize TF ChIP-seq datasets and Arabidopsis motifs from JASPAR.
+- All TF lists were annotated with iTAK. The six TF lists provided are examples; for other species, annotate the proteome with iTAK and use the same two-column format.
+- Accessible-chromatin peak files and genome files are not redistributed. Process the listed accessions, or your own ATAC-seq/DNase-seq data, into peak files, then download the genome files from the sources in Supplemental Table 1.
+
+### Precomputed regulatory feature matrices
+
+Each species has two evidence settings, built with Module 1. File names follow `{SpeciesID}_TF_regulatory_Coexpr{w}_Binding{w}_Motif{Y|N}[_overlap].h5`:
+
+| Name field | Meaning | `--coexpr_chip_motif` / output |
+| --- | --- | --- |
+| `Coexpr{w}` | Co-expression (GENIE3) weight | first value |
+| `Binding{w}` | Projected TF-binding (ChIP-seq/DAP-seq) weight | second value |
+| `Motif{Y\|N}` | Motif-filtered links (`Y`) or no motif filtering (`N`) | third value |
+| `_overlap` | Only links supported by both co-expression and binding evidence are kept; all other entries are 0 | `*_overlap.h5`, written when both weights are > 0 |
+
+| File | Setting | Use |
+| --- | --- | --- |
+| `*_Coexpr1.0_Binding0.0_MotifN.h5` | `"1,0,N"` | Co-expression only, with no motif filtering. This setting retains the most links, including more false positives, and may give higher CatBoost performance. |
+| `*_Coexpr0.5_Binding0.5_MotifY_overlap.h5` | `"0.5,0.5,Y"`, overlap output | Equal co-expression and binding weights, motif-filtered, overlap links only. This is the most stringent setting for TF prioritization. |
+
+Each file holds one pandas DataFrame under the key `/regulons`. Rows are target genes (index `Target`), columns are TFs (`TF`), and values are the weighted regulatory scores (0 means no link). These files can be passed directly to Module 2 with `--TF_features` and `--h5_key /regulons`:
+
+```python
+import pandas as pd
+reg = pd.read_hdf("O_sativa_TF_regulatory_Coexpr0.5_Binding0.5_MotifY_overlap.h5", key="regulons")
+reg.shape  # (number of target genes, number of TFs)
 ```
 
 ## Module 1: Regulatory Matrix Construction
@@ -71,6 +182,8 @@ SpeciesID    GenomeFASTA    AnnotationGFF3    ProteinFASTA
 ```text
 TFGeneID    TFFamily
 ```
+
+Example TF lists annotated with iTAK are provided in `resources/tf_lists/`.
 
 **Expression matrix**
 
@@ -92,13 +205,15 @@ ReferenceSpeciesID    ReferenceTFGeneID    TFName    TFFamily    PeakFile
 
 Peak files must use a narrowPeak-compatible layout. PURE reads genomic coordinates from columns 1–3, signal from column 7, and summit offset from column 10.
 
+The reference configuration used for the 11-species analysis is `resources/reference_binding/reference_binding_peaks_config.tsv`. Its peak files are on Zenodo (see [Precomputed Resources](#precomputed-resources)).
+
 **Accessible-chromatin configuration**
 
 ```text
 SpeciesID    AccessibleRegionBED
 ```
 
-Accessible regions may be derived from ATAC-seq or DNase-seq. Entries are required for the target species and selected reference species used in the run.
+Accessible regions may be derived from ATAC-seq or DNase-seq. Entries are required for the target species and selected reference species used in the run. The public datasets used in the 11-species analysis are listed in `resources/chromatin_accessibility/`.
 
 **Motif-family mapping**
 
@@ -106,7 +221,7 @@ Accessible regions may be derived from ATAC-seq or DNase-seq. Entries are requir
 MotifID    TFFamily
 ```
 
-`--motif_file` must be a MEME-format motif file.
+`--motif_file` must be a MEME-format motif file. The motif file and motif-family mapping used by PURE are provided in `resources/motifs/`.
 
 ### Preflight check
 
@@ -217,6 +332,8 @@ python Script/PURE_CatBoost_SHAP_v3.py \
   --l2_leaf_reg 3.0 \
   --auto_class_weights Balanced
 ```
+
+To analyze another species, replace `--TF_features` with one of the precomputed matrices for the 11 species (see [Precomputed Resources](#precomputed-resources)), for example `O_sativa_TF_regulatory_Coexpr0.5_Binding0.5_MotifY_overlap.h5`.
 
 The DEG file is an index-oriented two-column CSV:
 
