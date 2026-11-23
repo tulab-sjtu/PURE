@@ -47,6 +47,9 @@ Script/
   PURE_Contribution_Visualization.py      Pathway-level visualization
   PURE_env.yml                            Conda environment
 
+scPURE/
+  scPURE.skill                            Single-cell PURE skill for coding agents (v0.3.1)
+
 Example_data.tar.gz                       Reproducible example inputs
 Expression_rawdata_accession_for_PURE.csv RNA-seq accessions used by PURE
 Figures/
@@ -360,6 +363,31 @@ python Script/PURE_Contribution_Visualization.py \
   --heatmap_expression Example_data/3_visualization_example_data/Os_zeitgeber_TPM.tsv \
   --model_species_annotation Example_data/3_visualization_example_data/At_annotation.config
 ```
+
+## scPURE.skill: PURE for single-cell data
+
+`scPURE/scPURE.skill` is a single-file skill that lets a coding agent (Claude Code, Codex, OpenCode or similar) run the PURE CatBoost–SHAP prioritization on single-cell or single-nucleus RNA-seq data. It calls DEGs from biological-sample pseudobulks, uses your own TF–target network (for example a pySCENIC adjacency table) as features, and ranks the TFs that explain each contrast. All code is embedded in the file: the agent writes it out, sets up one conda environment (`scPURE_agent`) and runs everything locally.
+
+**Usage**
+
+1. Download [`scPURE/scPURE.skill`](./scPURE/scPURE.skill) to a folder your coding agent can read.
+2. Ask the agent, giving absolute paths, for example:
+
+```text
+Please load scPURE.skill and analyse my snRNA-seq data.
+- Data: /data/kernel.rds (Seurat object, raw counts in RNA/counts); sample field: sampleID; cell-type field: celltype; stage field: DAP
+- Contrasts: BETL versus all other cells; within BETL, 12DAP versus 8DAP
+- Network: /data/scenic_adj.csv (columns TF, target, importance)
+- Output: /data/scPURE_out
+```
+
+3. The agent inspects the files, asks only about missing information, shows the analysis plan for confirmation and then runs it.
+
+**Inputs.** Required: a `.loom` file or a Seurat `.rds` with raw counts and a biological-sample field, at least one contrast, a TF–target network and an output folder. Optional: a gene symbol/GO table with `go-basic.obo`, a MapMan/Mercator table, and protein FASTA + GFF3 + TF peak/bigWig table for binding support.
+
+**Outputs.** DEG tables, cross-validated model performance, TF rankings, target and pathway tables, GO/MapMan enrichment and optional binding tracks, as vector PDFs with CSV source tables, plus a descriptive English Word report (`14_report/scPURE_report.docx`).
+
+When using scPURE.skill, please cite PURE (Li et al., 2026, *Plant Communications*, https://doi.org/10.1016/j.xplc.2026.102118).
 
 ## Web Application
 
